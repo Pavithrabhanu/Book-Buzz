@@ -4,12 +4,21 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const apiUrl = 'http://localhost:5000/books';
     
+    // Show initial message
+    booksContainer.innerHTML = '<div class="initial-message">Please select a category to view books</div>';
+    
     categorySelect.addEventListener('change', () => {
         fetchBooks(categorySelect.value);
     });
     
     function fetchBooks(category) {
-        booksContainer.innerHTML = '<p>Loading...</p>';
+        // Show loading state
+        booksContainer.innerHTML = `
+            <div class="loading-container">
+                <div class="loading-spinner"></div>
+                <p>Loading books...</p>
+            </div>
+        `;
         
         fetch(`${apiUrl}?category=${category}`)
             .then(response => {
@@ -19,31 +28,41 @@ document.addEventListener('DOMContentLoaded', () => {
                 return response.json();
             })
             .then(data => {
-                displayBooks(data);
+                // Add a small delay for smoother transition
+                setTimeout(() => {
+                    displayBooks(data);
+                }, 300);
             })
             .catch(error => {
                 console.error('Error fetching books:', error);
-                booksContainer.innerHTML = '<p>Failed to load books. Please try again.</p>';
+                booksContainer.innerHTML = `
+                    <div class="error-message">
+                        <p>Failed to load books. Please try again.</p>
+                        <button class="retry-button" onclick="location.reload()">Retry</button>
+                    </div>
+                `;
             });
     }
     
     function displayBooks(books) {
         if (books.length === 0) {
-            booksContainer.innerHTML = '<p>No books found in this category.</p>';
+            booksContainer.innerHTML = '<div class="empty-message">No books found in this category.</div>';
             return;
         }
         
         booksContainer.innerHTML = '';
         
-        books.forEach(book => {
+        // Create and append book cards with a staggered animation
+        books.forEach((book, index) => {
             const bookCard = createBookCard(book);
+            bookCard.style.animationDelay = `${index * 0.1}s`;
             booksContainer.appendChild(bookCard);
         });
     }
     
     function createBookCard(book) {
         const bookCard = document.createElement('div');
-        bookCard.className = 'book-card';
+        bookCard.className = 'book-card fade-in';
         
         const happinessScore = Math.round(book.happiness_score);
         
@@ -51,18 +70,24 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="book-info">
                 <h3 class="book-title">${book.title}</h3>
                 <p class="book-author">by ${book.author}</p>
-                <p class="book-price">$${book.price_usd}</p>
+                <p class="book-price">$${book.price_usd.toFixed(2)}</p>
                 <div class="happiness-container">
                     <div class="happiness-label">
-                        <span>Happiness Score</span>
+                        <span>Reader Happiness</span>
                         <span>${happinessScore}%</span>
                     </div>
                     <div class="happiness-bar">
-                        <div class="happiness-fill" style="width: ${happinessScore}%"></div>
+                        <div class="happiness-fill" style="width: 0%"></div>
                     </div>
                 </div>
             </div>
         `;
+        
+        // Animate happiness bar after a short delay
+        setTimeout(() => {
+            const happinessFill = bookCard.querySelector('.happiness-fill');
+            happinessFill.style.width = `${happinessScore}%`;
+        }, 100);
         
         return bookCard;
     }
