@@ -1,34 +1,101 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import React, { useState, useEffect } from 'react';
+import Header from './components/Header';
+import BookCard from './components/BookCard';
+import SkeletonCard from './components/SkeletonCard';
+import type { Book } from './types';
+import { API_URL } from './utils/constants';
 
-function App() {
-  const [count, setCount] = useState(0)
+const App: React.FC = () => {
+  const [category, setCategory] = useState<string>('');
+  const [lovedBooks, setLovedBooks] = useState<Book[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>('');
+  const [searchTerm, setSearchTerm] = useState<string>('');
+
+  // Fetch most loved books when category changes
+  useEffect(() => {
+    if (!category) {
+      setLovedBooks([]);
+      return;
+    }
+    setLoading(true);
+    setError('');
+    fetch(`${API_URL}/loved?category=${category}`)
+      .then(res => {
+        if (!res.ok) throw new Error('Failed to fetch loved books');
+        return res.json();
+      })
+      .then(data => {
+        // Map backend data to Book type
+        const books: Book[] = data.map((b: any) => ({
+          id: b.book_id.toString(),
+          title: b.title,
+          author: b.author,
+          category: b.category,
+          happiness: b.happiness,
+          price_usd: b.price_usd,
+          love_score: b.love_score,
+        }));
+        setLovedBooks(books);
+      })
+      .catch(err => {
+        console.error(err);
+        setError('Failed to load books');
+      })
+      .finally(() => setLoading(false));
+  }, [category]);
+
+  // Filter by search term
+  const filteredBooks = lovedBooks.filter(book =>
+    book.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  // Generate skeleton cards for loading state
+  const skeletonCards = Array.from({ length: 10 }, (_, i) => (
+    <SkeletonCard key={`skeleton-${i}`} />
+  ));
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white">
-      <div className="flex justify-center">
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="h-24 p-6 transition-all duration-300 hover:drop-shadow-[0_0_2em_#646cffaa]" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="h-24 p-6 transition-all duration-300 animate-spin-slow hover:drop-shadow-[0_0_2em_#61dafbaa]" alt="React logo" />
-        </a>
-      </div>
-      <h1 className="text-5xl font-bold">Vite + React</h1>
-      <div className="p-8">
-        <button className="rounded-lg border border-transparent px-4 py-2 text-base font-medium bg-gray-800 cursor-pointer transition-colors hover:border-blue-500" onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p className="my-4">
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="text-gray-500">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
-}
+    <>
+      <Header
+        category={category}
+        onCategoryChange={setCategory}
+        searchTerm={searchTerm}
+        onSearchTermChange={setSearchTerm}
+      />
+      {error && <div className="error-message">{error}</div>}
+      
+      {!category ? (
+        <div className="empty-message">Please select a category to view top loved books</div>
+      ) : loading ? (
+        <div className="top-loved-container">
+          <h2 className="section-title">Loading Top Books</h2>
+          <p className="section-description">
+            Finding the most loved books in this category...
+          </p>
+          <div className="top-books-grid">
+            {skeletonCards}
+          </div>
+        </div>
+      ) : lovedBooks.length === 0 ? (
+        <div className="empty-message">No loved books found for this category</div>
+      ) : filteredBooks.length > 0 ? (
+        <div className="top-loved-container">
+          <h2 className="section-title">Top 10 Most Loved Books</h2>
+          <p className="section-description">
+            Based on both rating scores and sentiment analysis of review text
+          </p>
+          <div className="top-books-grid">
+            {filteredBooks.map(book => (
+              <BookCard key={book.id} book={book} />
+            ))}
+          </div>
+        </div>
+      ) : (
+        <div className="empty-message">No results found for "{searchTerm}"</div>
+      )}
+    </>
+  );
+};
 
-export default App
+export default App;
