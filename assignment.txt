@@ -1,0 +1,80 @@
+Hands-on Assignment
+
+Description: AI expertise to turn product ideas into working AI features, build and manage the models, pick and set up the right tools and infrastructure, guide designers, product managers and developers in clear language, keep things safe, fair and cost-efficient, bring solid experience in software and machine-learning projects with cloud deployment, and—within six months—ship a standout AI feature, create a practical AI playbook and lift the whole team’s skills.
+
+Assignment -  “Book Buzz” One-Page Dashboard
+________________________________________
+1. Why we’re giving you this task
+We want to see how you turn a few separate bits of data into a clear, useful web page—and how you add a light touch of machine learning to make it smarter.
+________________________________________
+2. What you will build
+A single web page that lets a visitor:
+1.	Pick a book category (e.g., Fiction, Science, History).
+2.	Instantly see the top-10 “most loved” books in that category.
+3.	View, for each book:
+o	Title & author
+o	Price (USD)
+o	A happiness score (how positive the reader reviews are) shown as a bar or badge
+________________________________________
+3. What we give you (in one ZIP)
+File / Folder	What’s inside
+books.csv	List of books with book_id, title, author, category
+reviews.csv	Reader reviews with review_id, book_id, text, rating (1–5 stars)
+prices.csv	book_id, price_usd
+backend/	Tiny Python/Flask starter and requirements.txt
+frontend/	Very simple HTML page with placeholders
+All three CSVs are small (< 1 MB each) and load instantly.
+________________________________________
+4. What you need to do
+Step	What to deliver	Tips
+A. Analyse the reviews	Turn the 1–5 star ratings into a “happiness score” from 0 % (sad) to 100 %(very happy). Average the scores for each book.	A simple formula is fine: e.g., map 1 ★ → 0 %, 5 ★ → 100 %.
+B. Join the data	Combine the three CSVs so every book has title, author, category, price, happiness score.	Pandas merge makes this quick.
+C. Build one back-end route	GET /books?category=Fiction returns the top-10 books (JSON) sorted by happiness.	Use Flask + CORS; no auth needed.
+D. Finish the web page	Dropdown for category → fetch data → show a clean list/table with the fields above and a coloured happiness bar.	Vanilla JS or React—your choice.
+E. Write a short README	Clear steps: install → run back-end → open front-end.	Keep it brief and in simple language.
+Optional extras if you have time: add search by title, unit test for the route, or a Dockerfile.
+________________________________________
+5. How to run (quick view)
+# Back-end
+cd backend
+python3 -m venv venv && source venv/bin/activate
+
+6. How to submit
+1.	Push your code to a Git repo (public or invite us).
+2.	Add a short screen recording (or live link) that shows: choose a category → see the top-10 list.
+________________________________________
+7. What we look for
+Area	What matters most
+Clarity of code	Easy to read, good names, short functions
+Correct data join & score	Books appear with the right happiness and price
+Smooth page	Dropdown works, list updates fast, no page reloads
+Easy setup	README steps work first try
+Nice extras	Tests, Docker, styling (bonus, not required)
+Target effort: about 3-8 hours.
+
+
+
+
+
+
+
+pip install -r requirements.txt
+python app.py   # runs on http://localhost:5000
+
+# Front-end
+open frontend/index.html   # or start your dev server if using React
+________________________________________
+6. How to submit
+1.	Push your code to a Git repo (public or invite us).
+2.	Add a short screen recording (or live link) that shows: choose a category → see the top-10 list.
+________________________________________
+7. What we look for
+Area	What matters most
+Clarity of code	Easy to read, good names, short functions
+Correct data join & score	Books appear with the right happiness and price
+Smooth page	Dropdown works, list updates fast, no page reloads
+Easy setup	README steps work first try
+Nice extras	Tests, Docker, styling (bonus, not required)
+Target effort: about 3-8 hours.
+________________________________________
+

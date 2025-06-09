@@ -1,0 +1,91 @@
+review_id,book_id,text,rating
+1,1,One of the best books I've ever read,5
+2,1,A classic that everyone should read,5
+3,1,Powerful story and unforgettable characters,4
+4,2,A chilling dystopian novel that's increasingly relevant,5
+5,2,Orwell was a visionary,4
+6,2,Scary but important read,4
+7,3,A timeless romance,5
+8,3,Witty and wonderful,4
+9,3,Not my favorite Austen work,3
+10,4,Beautiful prose but depressing story,4
+11,4,A perfect snapshot of the Jazz Age,5
+12,4,Overrated in my opinion,2
+13,5,Captured adolescent angst perfectly,4
+14,5,I related to Holden so much,5
+15,5,Couldn't connect with the character,2
+16,6,A brilliant allegory,5
+17,6,Simple yet profound,4
+18,6,Required reading for everyone,5
+19,7,The perfect fantasy adventure,5
+20,7,Tolkien created a whole world,5
+21,7,A bit slow at times but wonderful overall,4
+22,8,The greatest fantasy epic ever written,5
+23,8,Worth the time investment,5
+24,8,Too many details and descriptions,3
+25,9,Changed my life,5
+26,9,Inspirational but a bit simplistic,3
+27,9,A spiritual journey worth taking,4
+28,10,Another brilliant dystopia from Huxley,5
+29,10,Prescient and disturbing,4
+30,10,Found it boring,2
+31,11,Made complex physics accessible,5
+32,11,Mind-blowing concepts explained clearly,5
+33,11,Too dense for the average reader,3
+34,12,Revolutionary ideas about evolution,4
+35,12,Fascinating perspective on genes,5
+36,12,Changed how I view life,5
+37,13,Sagan's passion for science is contagious,5
+38,13,Made me fall in love with astronomy,5
+39,13,Beautiful writing about the cosmos,4
+40,14,A sweeping history of humanity,5
+41,14,Thought-provoking and engaging,5
+42,14,Some controversial claims but fascinating,4
+43,15,The foundation of modern biology,5
+44,15,Revolutionary but dense reading,3
+45,15,Historically important but outdated in parts,3
+46,16,Science made fun and accessible,5
+47,16,Bryson has a gift for explanation,4
+48,16,Learned so much from this book,5
+49,17,A fascinating look at scientific discovery,4
+50,17,The human side of the DNA discovery,4
+51,17,Interesting but Watson is too self-centered,3
+52,18,A wake-up call that changed environmental awareness,5
+53,18,Still relevant decades later,4
+54,18,Important but alarmist in places,3
+55,19,Mukherjee makes genetics fascinating,5
+56,19,Comprehensive and beautifully written,5
+57,19,Too long but worth the effort,4
+58,20,A grand unified theory of human history,5
+59,20,Fascinating thesis about civilization development,4
+60,20,Oversimplifies complex historical processes,2
+61,21,History from the perspective of the marginalized,5
+62,21,Eye-opening alternative history,4
+63,21,Too biased to be taken seriously,2
+64,22,The definitive account of WWI's beginning,5
+65,22,Reads like a thriller but it's all true,5
+66,22,Masterful historical writing,4
+67,23,Makes American history come alive,5
+68,23,McCullough is a national treasure,5
+69,23,Engaging narrative of a pivotal year,4
+70,24,Lincoln's political genius revealed,5
+71,24,One of the best political biographies ever,5
+72,24,Detailed and fascinating,4
+73,25,Comprehensive account of Nazi Germany,5
+74,25,Monumental work of history,4
+75,25,Important but sometimes too journalistic,3
+76,26,Accessible ancient history,4
+77,26,Bauer makes distant history relevant,5
+78,26,A bit dry in places but informative,3
+79,27,Fresh perspective on Rome,5
+80,27,Beard challenges conventional wisdom brilliantly,4
+81,27,Academic but readable,4
+82,28,A new way of viewing world history,5
+83,28,Fascinating alternative to Eurocentric history,5
+84,28,Sometimes makes leaps in logic,3
+85,29,The Wright brothers come alive on the page,5
+86,29,McCullough captures their genius and perseverance,4
+87,29,Well-researched and well-told,4
+88,30,The definitive Napoleon biography,5
+89,30,Balanced view of a complex figure,4
+90,30,Too sympathetic to its subject,2 

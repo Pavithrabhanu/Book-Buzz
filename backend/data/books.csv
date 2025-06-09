@@ -1,0 +1,31 @@
+book_id,title,author,category
+1,To Kill a Mockingbird,Harper Lee,Fiction
+2,1984,George Orwell,Fiction
+3,Pride and Prejudice,Jane Austen,Fiction
+4,The Great Gatsby,F. Scott Fitzgerald,Fiction
+5,The Catcher in the Rye,J.D. Salinger,Fiction
+6,Animal Farm,George Orwell,Fiction
+7,The Hobbit,J.R.R. Tolkien,Fiction
+8,The Lord of the Rings,J.R.R. Tolkien,Fiction
+9,The Alchemist,Paulo Coelho,Fiction
+10,Brave New World,Aldous Huxley,Fiction
+11,A Brief History of Time,Stephen Hawking,Science
+12,The Selfish Gene,Richard Dawkins,Science
+13,Cosmos,Carl Sagan,Science
+14,Sapiens: A Brief History of Humankind,Yuval Noah Harari,Science
+15,The Origin of Species,Charles Darwin,Science
+16,A Short History of Nearly Everything,Bill Bryson,Science
+17,The Double Helix,James D. Watson,Science
+18,Silent Spring,Rachel Carson,Science
+19,The Gene: An Intimate History,Siddhartha Mukherjee,Science
+20,"Guns, Germs, and Steel",Jared Diamond,Science
+21,A People's History of the United States,Howard Zinn,History
+22,The Guns of August,Barbara W. Tuchman,History
+23,1776,David McCullough,History
+24,Team of Rivals,Doris Kearns Goodwin,History
+25,The Rise and Fall of the Third Reich,William L. Shirer,History
+26,The History of the Ancient World,Susan Wise Bauer,History
+27,SPQR: A History of Ancient Rome,Mary Beard,History
+28,The Silk Roads,Peter Frankopan,History
+29,The Wright Brothers,David McCullough,History
+30,Napoleon: A Life,Andrew Roberts,History 
