@@ -22,8 +22,8 @@ export function getInitials(author: string): string {
     .join('');
 }
 
-export function truncateTitle(title: string): string {
-  return title.length > 20 ? `${title.substring(0, 20)}...` : title;
+export function truncateTitle(title: string, maxLength: number = 20): string {
+  return title.length > maxLength ? `${title.substring(0, maxLength)}...` : title;
 }
 
 export function getStars(happiness: number): string[] {

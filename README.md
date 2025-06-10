@@ -1,71 +1,72 @@
-# Book Buzz Dashboard
+# Book Browsing App
 
-A minimalist web application that displays the top-10 "most loved" books by category with happiness scores calculated from reader reviews.
+A web application to browse and discover the top 10 most loved books by category.
 
-## Setup Instructions
+## Features
 
-### Backend Setup
+- 3D-styled book cover cards with category and "Most Loved" badges
+- Backend sentiment analysis using TextBlob
+- Love score combines star ratings and review sentiment
+- Custom React hook (`useLovedBooks`) for data fetching
+- Responsive UI with skeleton loading states
+- Automated tests for backend routes with pytest
 
-1. Navigate to the backend directory:
-   ```
-   cd backend
-   ```
+## Tech Stack
 
-2. Create a Python virtual environment:
-   ```
-   python -m venv venv
-   ```
+- **Backend**: Python, Flask, pandas, TextBlob
+- **Frontend**: React, Vite, TypeScript, CSS
+- **Testing**: pytest (Python)
 
-3. Activate the virtual environment:
-   - On Windows:
-     ```
-     venv\Scripts\activate
-     ```
-   - On macOS/Linux:
-     ```
-     source venv/bin/activate
-     ```
+## Prerequisites
 
-4. Install dependencies:
-   ```
-   pip install -r requirements.txt
-   ```
+- Node.js (>=14.x) and npm
+- Python (>=3.8)
 
-5. Run the Flask application:
-   ```
-   python app.py
-   ```
-   The backend server will start at http://localhost:5000
+## Backend Setup
 
-### Frontend Setup
+```bash
+cd backend
+python -m venv venv            # create virtual environment
+venv\Scripts\activate         # Windows
+env/bin/activate             # macOS/Linux
+pip install -r requirements.txt # install dependencies
+python -m textblob.download_corpora  # download TextBlob corpora
+python app.py                   # start Flask server
+```
 
-Simply open the `frontend/index.html` file in your web browser.
+Backend will run at http://127.0.0.1:5000.
 
-If you need to serve it locally, you can use a simple HTTP server:
-- Using Python:
-  ```
-  cd frontend
-  python -m http.server
-  ```
-- Or any other local development server of your choice
+## Running Backend Tests
 
-## Usage
+```bash
+cd backend
+pytest                          # run all tests
+python test_love_scores.py Fiction  # run love score tests for Fiction category
+python test_api.py              # run API tests only
+```
 
-1. Select a book category from the dropdown menu
-2. View the top-10 most loved books in that category
-3. Each book card displays:
-   - Title & author
-   - Price (USD)
-   - Happiness score (calculated from review ratings)
+## Frontend Setup
 
-## Data Structure
+```bash
+cd frontend
+npm install                     # installs dependencies and generates package-lock.json
+npm run dev                     # start development server
+```
 
-- `books.csv`: Contains book details (book_id, title, author, category)
-- `reviews.csv`: Contains reader reviews (review_id, book_id, text, rating)
-- `prices.csv`: Contains book prices (book_id, price_usd)
+Frontend will run at http://localhost:5173 (default Vite port).
 
-## Implementation Details
+## Project Structure
 
-- Happiness score is calculated by mapping 1-5 star ratings to 0-100% scale
-- Books are sorted by their average happiness score
-- The top-10 books in each category are displayed 
+```
+/backend           # Flask API, data processing, and tests
+/frontend          # React application with Vite
+README.md          # Project overview and setup instructions
+```
+
+## Code Quality
+
+- ESLint and Prettier for frontend formatting
+- flake8 and black recommended for Python
+- Use small, focused functions and clear naming for maintainability
+
+Enjoy exploring the books! 🎉 

@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import type { Book } from '../types';
-import { getCoverColors, getInitials, truncateTitle, getStars, getGlowClass } from '../utils/bookHelpers';
+import { getCoverColors, getStars, getGlowClass } from '../utils/bookHelpers';
 
 interface BookCardProps {
   book: Book;
@@ -8,10 +8,29 @@ interface BookCardProps {
 
 const BookCard: React.FC<BookCardProps> = ({ book }) => {
   const { headerColor, spineColor, textColor } = getCoverColors(book.category);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 480);
+  
+  // Check for mobile device on component mount and window resize
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 480);
+    };
+    
+    // Initial check
+    checkMobile();
+    
+    // Add resize listener
+    window.addEventListener('resize', checkMobile);
+    
+    // Cleanup
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
-  const initials = getInitials(book.author);
+  // Full title and author for the book cover
+  const coverTitle = book.title;
 
-  const shortTitle = truncateTitle(book.title);
+  // Main title for displaying below the cover
+  const displayTitle = book.title;
 
   const starSymbols = getStars(book.happiness);
 
@@ -21,40 +40,40 @@ const BookCard: React.FC<BookCardProps> = ({ book }) => {
   const hasLoveScore = 'love_score' in book;
 
   return (
-    <div className="book-card fade-in">
+    <div className={`book-card fade-in ${isMobile ? 'mobile-view' : ''}`}>
       <div className="book-card-inner">
+        {hasLoveScore && (
+          <span className="love-badge">Most Loved</span>
+        )}
         <div className="book-cover-container">
           <div className="book-cover-3d">
-            <div className="book-spine" style={{ background: spineColor }} />
             <div className="book-front">
               <div className="book-front-top" style={{ background: headerColor }} />
               <div className="book-front-bottom">
                 <div className="book-cover-content" style={{ color: textColor }}>
-                  <div className="book-cover-title">{shortTitle}</div>
-                  <div className="book-cover-author">{initials}</div>
+                  <div className="book-cover-title">{coverTitle}</div>
+                  <div className="book-cover-author">{book.author}</div>
                   <div className="triangle-icon">▲</div>
                 </div>
               </div>
             </div>
-            <div className="book-side" style={{ background: spineColor }} />
           </div>
           <span className={`category-badge ${book.category.toLowerCase()}`}>{book.category}</span>
-          {hasLoveScore && (
-            <span className="love-badge">❤️ Most Loved</span>
-          )}
         </div>
         <div className="book-details">
-          <h3 className="book-title">{book.title}</h3>
+          <h3 className="book-title">{displayTitle}</h3>
           <p className="book-author">by {book.author}</p>
           <div className="book-rating">
             <div className={`star-rating ${glowClass}`}>
               {starSymbols.map((star, index) => (
                 <span 
                   key={index} 
-                  className={`star ${index < Math.floor(book.happiness * 5) ? 'full' : 
-                             index === Math.floor(book.happiness * 5) && 
-                             (book.happiness * 5) % 1 >= 0.25 && 
-                             (book.happiness * 5) % 1 < 0.75 ? 'half' : 'empty'}`}
+                  className={`star ${
+                    index < Math.floor(book.happiness * 5) ? 'full' : 
+                    index === Math.floor(book.happiness * 5) && 
+                    (book.happiness * 5) % 1 >= 0.25 && 
+                    (book.happiness * 5) % 1 < 0.75 ? 'half' : 'empty'
+                  }`}
                 >
                   {star}
                 </span>
