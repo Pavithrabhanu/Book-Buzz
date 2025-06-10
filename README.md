@@ -4,7 +4,7 @@ A web application to browse and discover the top 10 most loved books by category
 
 ## Features
 
-- 3D-styled book cover cards with category and "Most Loved" badges
+- Book cover cards with category and "Most Loved" badges
 - Backend sentiment analysis using TextBlob
 - Love score combines star ratings and review sentiment
 - Custom React hook (`useLovedBooks`) for data fetching
@@ -31,7 +31,6 @@ venv\Scripts\activate         # Windows
 env/bin/activate             # macOS/Linux
 pip install -r requirements.txt # install dependencies
 python -m textblob.download_corpora  # download TextBlob corpora
-python app.py                   # start Flask server
 ```
 
 Backend will run at http://127.0.0.1:5000.
